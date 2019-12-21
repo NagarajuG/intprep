@@ -1,0 +1,23 @@
+package leetCode;
+
+public class CoinChange322 {
+
+	public int coinChange(int[] coins, int amount) {
+		if (amount <= 0 || coins.length == 0)
+			return -1;
+
+		int[] result = new int[amount + 1];
+
+	}
+
+	public static void main(String[] args) {
+
+		CoinChange322 coinChange322 = new CoinChange322();
+		int[] coins = new int[] { 186, 419, 83, 408 };
+		int amount = 6249;
+
+		System.out.println("The result is ....\t" + coinChange322.coinChange(coins, amount));
+
+	}
+
+}

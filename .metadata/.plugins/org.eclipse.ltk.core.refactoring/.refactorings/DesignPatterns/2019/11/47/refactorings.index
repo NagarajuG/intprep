@@ -1,0 +1,4 @@
+1574456775615	Encapsulate field 'channelName'
+1574457239344	Encapsulate field 'channel'
+1574457596443	Extract interface 'observer'
+1574457641736	Extract interface 'Subject'

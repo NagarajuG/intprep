@@ -1,0 +1,118 @@
+package Graphs;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class DFS {
+
+	public static class Graph {
+		int V;
+		LinkedList<Integer> adjusentList[];
+
+		Graph(int v) {
+			V = v;
+
+			adjusentList = new LinkedList[V];
+
+			for (int i = 0; i < v; i++) {
+				adjusentList[i] = new LinkedList<>();
+			}
+		}
+	}
+
+	public static void addEdge(Graph graph, int src, int dest) {
+		if (graph != null) {
+
+			graph.adjusentList[src].add(dest);
+
+		}
+	}
+
+	static void printGraph(Graph graph) {
+		for (int v = 0; v < graph.V; v++) {
+			System.out.println("adjusent list of vertex" + v);
+			System.out.print("head ");
+			for (Integer i : graph.adjusentList[v]) {
+				System.out.printf("( %d, %d)", v, i);
+			}
+
+			System.out.println("\n");
+
+		}
+	}
+
+	static void DfsUtil(Graph graph, int v, boolean[] visited) {
+		if (visited[v] != true) {
+			visited[v] = true;
+			System.out.print(v + "\t");
+
+			Iterator<Integer> i = graph.adjusentList[v].iterator();
+			while (i.hasNext()) {
+				int n = i.next();
+				if (!visited[n])
+					DfsUtil(graph, n, visited);
+			}
+
+		}
+	}
+
+	static void DFSearch(Graph graph, int start) {
+		boolean[] visited = new boolean[graph.V];
+
+		DfsUtil(graph, start, visited);
+
+	}
+
+	static void BfsUtil(Graph graph, int v, boolean[] visited) {
+		if (visited[v] != true) {
+			visited[v] = true;
+			System.out.print(v + "\t");
+			LinkedList<Integer> queue = new LinkedList<Integer>();
+
+			queue.add(v);
+
+			while (queue.size() != 0) {
+				int cv = queue.poll();
+				Iterator<Integer> i = graph.adjusentList[cv].iterator();
+				while (i.hasNext()) {
+					int n = i.next();
+					visited[n] = true;
+					queue.add(n);
+				}
+
+			}
+
+		}
+	}
+
+	static void BFSearch(Graph graph, int start) {
+		boolean[] visited = new boolean[graph.V];
+
+		BfsUtil(graph, start, visited);
+
+	}
+
+	public static void main(String[] args) {
+
+		Graph graph = new Graph(4);
+
+		addEdge(graph, 0, 1);
+		addEdge(graph, 0, 2);
+		addEdge(graph, 1, 2);
+		addEdge(graph, 2, 0);
+		addEdge(graph, 2, 3);
+		addEdge(graph, 3, 3);
+
+		printGraph(graph);
+
+		System.out.println("\n DFS travel path is \n");
+
+		DFSearch(graph, 2);
+		
+		System.out.println("\n BFS travel path is \n");
+
+		BFSearch(graph, 2);
+
+	}
+
+}

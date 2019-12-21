@@ -1,0 +1,86 @@
+package DivideAndConquer;
+
+public class CountInversions {
+	static int merge(int[] A, int l, int m, int h) {
+		int n1 = m - l + 1;
+		int n2 = h - m;
+		int i, j;
+		int inversions = 0;
+
+		int[] A1 = new int[n1];
+		int[] A2 = new int[n2];
+
+		for (i = 0; i < n1; i++)
+			A1[i] = A[l + i];
+		for (j = 0; j < n2; j++)
+			A2[j] = A[m + 1 + j];
+
+		i = 0;
+		j = 0;
+		int k = l;
+		while (i < n1 && j < n2) {
+			if (A1[i] <= A2[j])
+				A[k++] = A1[i++];
+			else {
+				inversions++;
+				A[k++] = A2[j++];
+			}
+
+		}
+
+		for (; i < n1; i++) {
+			inversions++;
+			A[k++] = A1[i];
+		}
+
+		for (; j < n2; j++)
+			A[k++] = A2[j];
+
+		return inversions;
+
+	}
+
+	static int mergeSort(int[] A, int l, int h) {
+		int total = 0;
+		if (l < h) {
+			int m = (l + h) / 2;
+			total += mergeSort(A, l, m);
+			total += mergeSort(A, m + 1, h);
+			total += merge(A, l, m, h);
+		}
+
+		return total;
+
+	}
+
+	static void display(int A[], int n) {
+		for (int i = 0; i < n; i++)
+			System.out.print(A[i] + "\t");
+	}
+
+	public static void main(String[] args) {
+		// Scanner sc = new Scanner(System.in);
+		// System.out.println("Enter no elements\n");
+		int noOfElements = 10; // sc.nextInt();
+
+		int A[] = new int[] { 5, 6, 7, 8, 4, 3, 2, 9, 10, 1 };
+
+		/*
+		 * for (int i = 0; i < noOfElements; i++) { A[i] = sc.nextInt(); }
+		 * 
+		 * sc.close();
+		 */
+
+		System.out.println("elements before sorting\n");
+		display(A, noOfElements);
+
+		int total = mergeSort(A, 0, noOfElements - 1);
+
+		System.out.println("\ntotal no of inversions is " + total);
+
+		System.out.println("\n elements After sorting\n");
+		display(A, noOfElements);
+
+	}
+
+}

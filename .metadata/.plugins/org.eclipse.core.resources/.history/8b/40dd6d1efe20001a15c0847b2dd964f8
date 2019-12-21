@@ -1,0 +1,40 @@
+package leetCode;
+
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+public class CoinChange322 {
+	
+    public int coinChange(int[] coins, int amount) {
+    	if(amount <= 0 || coins.length == 0)
+    		return -1;
+    	
+    	PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(Comparator.reverseOrder());
+    	int result = 0, newAmount = amount;
+    	
+    	for(int coin: coins) {
+    		maxHeap.offer(coin);
+    	}
+    	
+    	while(newAmount > 0  && maxHeap.size() > 0) {
+    		int p = maxHeap.poll();
+    		result += newAmount / p;
+    		newAmount = newAmount % p;
+    	}
+    	if(newAmount == 0) {
+    		return result == 0 ? -1 : result;	
+    	} 
+    	
+    	return -1;
+    	
+    	
+    	
+        
+    }
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,39 @@
+package leetCode;
+
+import java.util.Arrays;
+
+public class CoinChange322 {
+
+	public int coinChange(int[] coins, int amount) {
+		if (amount <= 0 || coins.length == 0)
+			return 0;
+
+		int[] result = new int[amount + 1];
+
+		Arrays.fill(result, amount + 1);
+
+		for (int i = 0; i < result.length; i++) {
+			for (int j = 0; j < coins.length; j++) {
+				if (i >= coins[j]) {
+					result[i] = Math.min(result[i], 1 + result[i - coins[j]]);
+				}
+
+			}
+
+		}
+
+		return result[amount] > amount ? -1 : result[amount];
+
+	}
+
+	public static void main(String[] args) {
+
+		CoinChange322 coinChange322 = new CoinChange322();
+		int[] coins = new int[] { 186, 419, 83, 408 };
+		int amount = 6249;
+
+		System.out.println("The result is ....\t" + coinChange322.coinChange(coins, amount));
+
+	}
+
+}

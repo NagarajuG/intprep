@@ -1,0 +1,111 @@
+package Trees;
+
+import java.util.Scanner;
+
+public class HeapTree {
+
+
+	public static class Tree {
+		int data;
+		Tree left;
+		Tree right;
+
+		Tree(int x) {
+			data = x;
+			left = null;
+			right = null;
+		}
+	}
+
+	static Tree formTree(Tree root, Tree node) {
+		Tree p, p1;
+		if (root == null) {
+			root = node;
+		} else {
+			p = root;
+			p1 = p;
+			while (p != null) {
+				if (node.data > p.data) {
+					p1 = p;
+					p = p.right;
+				} else {
+					p1 = p;
+					p = p.left;
+				}
+			}
+
+			if (node.data > p1.data)
+				p1.right = node;
+			else
+				p1.left = node;
+
+		}
+
+		return root;
+	}
+
+	static void reverseInOrder(Tree root) {
+		Tree p = root;
+		if (p != null) {
+			reverseInOrder(p.right);
+			System.out.print(p.data + "\t");
+			reverseInOrder(p.left);
+		}
+	}
+
+	static void inOrder(Tree root) {
+		Tree p = root;
+		if (p != null) {
+			inOrder(p.left);
+			System.out.print(p.data + "\t");
+			inOrder(p.right);
+		}
+	}
+
+	static void preOrder(Tree root) {
+		Tree p = root;
+		if (p != null) {
+			System.out.print(p.data + "\t");
+			preOrder(p.left);
+			preOrder(p.right);
+		}
+	}
+
+	static void postOrder(Tree root) {
+		Tree p = root;
+		if (p != null) {
+			postOrder(p.left);
+			postOrder(p.right);
+			System.out.print(p.data + "\t");
+		}
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Tree root = null;
+
+		int n = sc.nextInt();
+		while (n != 0) {
+			Tree node = new Tree(n);
+			root = formTree(root, node);
+			n = sc.nextInt();
+		}
+
+		sc.close();
+
+		System.out.println("\nInorder traversal is \n");
+		inOrder(root);
+
+		System.out.println("\n Pre order traversal is \n");
+		preOrder(root);
+
+		System.out.println("\n Post order traversal is \n");
+		postOrder(root);
+		
+		System.out.println("\n Reverse In order / descending order traversal is \n");
+		reverseInOrder(root);
+
+	}
+
+
+}
