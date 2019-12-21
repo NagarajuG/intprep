@@ -48,7 +48,6 @@ public class CoinChange322 {
 	}
 
 	public static void main(String[] args) {
-
 		CoinChange322 coinChange322 = new CoinChange322();
 		int[] coins = new int[] { 186, 419, 83, 408 };
 		int amount = 6249;

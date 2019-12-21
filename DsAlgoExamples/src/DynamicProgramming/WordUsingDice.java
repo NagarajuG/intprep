@@ -1,6 +1,5 @@
 package DynamicProgramming;
 
-import java.util.Dictionary;
 import java.util.HashMap;
 
 public class WordUsingDice {
@@ -45,8 +44,6 @@ public class WordUsingDice {
 
 			}
 		}
-		
-		
 
 		System.out.println("The remaing string is ..." + iteration);
 

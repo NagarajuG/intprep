@@ -82,7 +82,7 @@ public class PermutationOfString {
 
 		ps.permuteC(chars, 0, chars.length - 1);
 
-		for (Map.Entry me : ps.map.entrySet()) {
+		for (Map.Entry<String, Integer> me : ps.map.entrySet()) {
 			System.out.println(me.getKey() + "\t" + me.getValue());
 
 		}
